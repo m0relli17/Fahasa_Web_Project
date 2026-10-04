@@ -1,10 +1,40 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
+    <section class="products-section">
+        <!-- Tab điều hướng (Rất giống Fahasa) -->
+        <div class="product-tabs">
+            <button class="tab-btn active">SÁCH BÁN CHẠY</button>
+            <button class="tab-btn">SÁCH MỚI PHÁT HÀNH</button>
+            <button class="tab-btn">SÁCH SẮP PHÁT HÀNH</button>
+        </div>
 
+        <!-- Lưới sản phẩm -->
+        <div class="product-grid">
+            <!-- Lặp lại khối product-card này khoảng 8-12 lần -->
+            <div class="product-card">
+                <div class="product-badge">-20%</div> <!-- Huy hiệu giảm giá -->
+                <div class="product-image">
+                    <img src="images/sach-dac-nhan-tam.jpg" alt="Đắc Nhân Tâm">
+                    <button class="btn-quick-view">Xem nhanh</button> <!-- Hiệu ứng hover -->
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Đắc Nhân Tâm</h3>
+                    <p class="product-author">Dale Carnegie</p>
+                    <div class="product-price">
+                        <span class="old-price">108.000đ</span>
+                        <span class="new-price">86.400đ</span>
+                    </div>
+                    <button class="btn-add-cart">Chọn mua</button>
+                </div>
+            </div>
+
+            <!-- Các product-card khác... -->
+        </div>
+    </section>
 </body>
 </html>
