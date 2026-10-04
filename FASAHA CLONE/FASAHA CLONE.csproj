@@ -7,8 +7,4 @@
     <RootNamespace>FASAHA_CLONE</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="components\" />
-  </ItemGroup>
-
 </Project>

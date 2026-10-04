@@ -1,0 +1,117 @@
+﻿/* --- RESET & BASIC STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* --- HEADER CONTAINER --- */
+.header-container {
+    background-color: #c92127; /* Màu đỏ thương hiệu Fahasa */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- LOGO & MENU ICON --- */
+.header-icon-menu a,
+.header-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header-logo img {
+    max-height: 40px;
+    width: auto;
+    display: block;
+}
+
+.fhs-icon-menu img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+/* --- SEARCH BAR --- */
+.header-search-bar {
+    flex: 1;
+    max-width: 650px;
+}
+
+    .header-search-bar .input-box {
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 2px 8px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .header-search-bar input.input-text {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #333333;
+        background: transparent;
+    }
+
+        .header-search-bar input.input-text::placeholder {
+            color: #999999;
+        }
+
+    .header-search-bar .button-search {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .header-search-bar .button-search img {
+            width: 18px;
+            height: 18px;
+        }
+
+/* --- ACTIONS (CART & ACCOUNT) --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-cart-icon,
+.header-account-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 4px;
+    transition: opacity 0.2s ease;
+}
+
+    .header-cart-icon:hover,
+    .header-account-icon:hover {
+        opacity: 0.8;
+    }
+
+    .header-cart-icon img,
+    .header-account-icon img {
+        width: 26px;
+        height: 26px;
+    }
