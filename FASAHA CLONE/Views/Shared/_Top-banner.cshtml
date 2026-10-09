@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+{<style>
+     /* Thanh nền tràn 100% toàn bộ chiều rộng màn hình */
+     .top-banner-wrapper {
+         width: 100%;
+         background-color: #241929; /* Mã màu nền tím đen của bạn */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin: 0;
+         padding: 0;
+     }
+
+     /* Thẻ bọc link */
+     .top-banner-link {
+         display: flex;
+         justify-content: center;
+         width: 100%;
+         max-width: 1200px; /* Giới hạn đúng 1200px như kích thước ảnh của bạn */
+         text-decoration: none;
+     }
+
+     /* Bức ảnh banner test 1200x80 của bạn */
+     .top-banner-img {
+         width: 100%;
+         max-width: 1200px;
+         height: auto;
+         display: block;
+     }
+</style>}
+<div class="top-banner-wrapper">
+    <a href="#" class="top-banner-link">
+        <img src="~/images/top-banner.png" alt="Top Banner" class="top-banner-img" />
+    </a>
+</div>
