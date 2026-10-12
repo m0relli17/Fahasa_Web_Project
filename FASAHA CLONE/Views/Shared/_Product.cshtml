@@ -2,78 +2,371 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+
+    var id = ViewContext.RouteData.Values["id"]?.ToString() ?? "1";
+    var name = "Nhà Giả Kim";
+    var author = "Paulo Coelho";
+    var price = 68000;
+    var oldPrice = 90000;
+    var category = "Văn học nước ngoài";
+    var image = "https://placehold.co/500x620/fff0f5/ff6fa4?text=The+Alchemist";
 }
 
-<div class="product-grid">
-    <div class="product-card">
-        <div class="product-badge">-20%</div>
-        <div class="product-image">
-            <img src="https://via.placeholder.com/200x200" alt="Cây Cam Ngọt Của Tôi">
+<style>
+    .pd-page {
+        --pink: #ff6fa4;
+        --light: #fff0f5;
+        color: #333;
+        font-family: Arial, sans-serif;
+        padding: 25px 0 55px;
+    }
+
+        .pd-page * {
+            box-sizing: border-box;
+        }
+
+    .pd-breadcrumb {
+        font-size: 13px;
+        color: #999;
+        margin-bottom: 24px;
+    }
+
+        .pd-breadcrumb a {
+            color: #888;
+            text-decoration: none;
+        }
+
+    .pd-main {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 40px;
+        background: white;
+        border: 1px solid #f0e5e9;
+        border-radius: 16px;
+        padding: 28px;
+    }
+
+    .pd-image-wrap {
+        background: var(--light);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .pd-image {
+        width: 100%;
+        max-width: 380px;
+        max-height: 480px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    .pd-category {
+        display: inline-block;
+        background: var(--light);
+        color: #e94f89;
+        border-radius: 20px;
+        padding: 7px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    .pd-name {
+        font-size: 30px;
+        line-height: 1.35;
+        margin: 0 0 14px;
+    }
+
+    .pd-meta {
+        color: #888;
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .pd-rating {
+        color: #f5a623;
+        margin: 16px 0;
+        font-size: 14px;
+    }
+
+    .pd-price-row {
+        background: #fff6f9;
+        border-radius: 12px;
+        padding: 18px;
+        margin: 20px 0;
+    }
+
+    .pd-price {
+        color: #ed4f89;
+        font-size: 30px;
+        font-weight: 800;
+    }
+
+    .pd-old-price {
+        color: #999;
+        text-decoration: line-through;
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    .pd-discount {
+        display: inline-block;
+        background: #ffe0eb;
+        color: #d83e77;
+        padding: 5px 8px;
+        border-radius: 6px;
+        margin-left: 8px;
+        font-size: 12px;
+    }
+
+    .pd-desc {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .pd-stock {
+        color: #269768;
+        font-size: 14px;
+        margin: 18px 0;
+    }
+
+    .pd-buy-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .pd-qty {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 9px;
+        overflow: hidden;
+        height: 46px;
+    }
+
+        .pd-qty button {
+            border: 0;
+            background: #fff;
+            width: 38px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .pd-qty input {
+            width: 45px;
+            text-align: center;
+            border: 0;
+            outline: none;
+        }
+
+    .pd-btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 0 20px;
+        min-height: 46px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pd-add {
+        background: white;
+        border: 1px solid var(--pink);
+        color: #e94f89;
+    }
+
+    .pd-buy {
+        background: var(--pink);
+        color: white;
+    }
+
+    .pd-btn:hover {
+        filter: brightness(.97);
+    }
+
+    .pd-benefits {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    .pd-benefit {
+        background: #fff8fa;
+        border-radius: 10px;
+        padding: 14px 8px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .pd-description-box {
+        margin-top: 24px;
+        border: 1px solid #eee;
+        border-radius: 14px;
+        padding: 24px;
+    }
+
+        .pd-description-box h2 {
+            font-size: 20px;
+            border-bottom: 2px solid var(--pink);
+            padding-bottom: 12px;
+            display: inline-block;
+        }
+
+    @@media(max-width: 750px) {
+        .pd-main {
+            grid-template-columns: 1fr;
+            padding: 16px;
+            gap: 24px;
+        }
+
+        .pd-name {
+            font-size: 25px;
+        }
+
+        .pd-price {
+            font-size: 25px;
+        }
+
+        .pd-benefits {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="pd-page">
+    <div class="pd-breadcrumb">
+        <a href="/">Trang chủ</a> /
+        <a href="/Product">Sản phẩm</a> /
+        Chi tiết sách
+    </div>
+
+    <div class="pd-main">
+        <div class="pd-image-wrap">
+            <img class="pd-image" src="@image" alt="@name" />
         </div>
-        <div class="product-info">
-            <h3 class="product-title"><a href="#">Cây Cam Ngọt Của Tôi</a></h3>
-            <div class="product-price">
-                <span class="current-price">86.400 đ</span>
-                <span class="original-price">108.000 đ</span>
+
+        <div>
+            <span class="pd-category">@category</span>
+            <h1 class="pd-name">@name</h1>
+
+            <div class="pd-meta">
+                Tác giả: <strong>@author</strong><br />
+                Mã sản phẩm: <strong>BOOK-@id</strong><br />
+                Nhà xuất bản: <strong>Nhà xuất bản tổng hợp</strong>
             </div>
-            <div class="product-rating">
-                <span class="stars">★★★★★</span>
-                <span class="review-count">(128)</span>
+
+            <div class="pd-rating">★★★★★ <span style="color:#888">(4.8/5 - Đánh giá mẫu)</span></div>
+
+            <div class="pd-price-row">
+                <span class="pd-price">@price.ToString("N0")₫</span>
+                <span class="pd-old-price">@oldPrice.ToString("N0")₫</span>
+                <span class="pd-discount">-24%</span>
+            </div>
+
+            <p class="pd-desc">
+                Một tác phẩm truyền cảm hứng về hành trình theo đuổi ước mơ,
+                khám phá bản thân và tìm thấy những giá trị ý nghĩa trong cuộc sống.
+                Một lựa chọn thú vị dành cho tủ sách của bạn.
+            </p>
+
+            <div class="pd-stock">✓ Còn hàng (dữ liệu minh họa)</div>
+
+            <div style="font-size:14px;font-weight:bold;margin-bottom:10px">
+                Số lượng
+            </div>
+
+            <div class="pd-buy-row">
+                <div class="pd-qty">
+                    <button type="button" id="pd-minus">−</button>
+                    <input id="pd-quantity" type="number" value="1" min="1" max="99" />
+                    <button type="button" id="pd-plus">+</button>
+                </div>
+
+                <button class="pd-btn pd-add" type="button" id="pd-add">
+                    ♡ Thêm vào giỏ
+                </button>
+
+                <button class="pd-btn pd-buy" type="button" id="pd-buy">
+                    Mua ngay
+                </button>
+            </div>
+
+            <div class="pd-benefits">
+                <div class="pd-benefit">🚚<br /><strong>Giao hàng</strong><br />Toàn quốc</div>
+                <div class="pd-benefit">📦<br /><strong>Đóng gói</strong><br />Cẩn thận</div>
+                <div class="pd-benefit">💗<br /><strong>Hỗ trợ</strong><br />Tận tâm</div>
             </div>
         </div>
     </div>
 
-    <div class="product-card">
-        <div class="product-badge">-15%</div>
-        <div class="product-image">
-            <img src="https://via.placeholder.com/200x200" alt="Nhà Giả Kim">
-        </div>
-        <div class="product-info">
-            <h3 class="product-title"><a href="#">Nhà Giả Kim</a></h3>
-            <div class="product-price">
-                <span class="current-price">67.150 đ</span>
-                <span class="original-price">79.000 đ</span>
-            </div>
-            <div class="product-rating">
-                <span class="stars">★★★★★</span>
-                <span class="review-count">(95)</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="product-badge">-25%</div>
-        <div class="product-image">
-            <img src="https://via.placeholder.com/200x200" alt="Đắc Nhân Tâm">
-        </div>
-        <div class="product-info">
-            <h3 class="product-title"><a href="#">Đắc Nhân Tâm (Khổ Nhỏ)</a></h3>
-            <div class="product-price">
-                <span class="current-price">64.500 đ</span>
-                <span class="original-price">86.000 đ</span>
-            </div>
-            <div class="product-rating">
-                <span class="stars">★★★★☆</span>
-                <span class="review-count">(210)</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="product-badge">-10%</div>
-        <div class="product-image">
-            <img src="https://via.placeholder.com/200x200" alt="Mắt Biếc">
-        </div>
-        <div class="product-info">
-            <h3 class="product-title"><a href="#">Mắt Biếc (Tái Bản 2023)</a></h3>
-            <div class="product-price">
-                <span class="current-price">99.000 đ</span>
-                <span class="original-price">110.000 đ</span>
-            </div>
-            <div class="product-rating">
-                <span class="stars">★★★★★</span>
-                <span class="review-count">(64)</span>
-            </div>
-        </div>
+    <div class="pd-description-box">
+        <h2>📖 Giới thiệu sách</h2>
+        <p class="pd-desc">
+            Nhà Giả Kim là câu chuyện về hành trình tìm kiếm kho báu và cũng là
+            hành trình khám phá chính mình. Cuốn sách gợi nhắc người đọc hãy
+            lắng nghe trái tim, kiên trì với ước mơ và trân trọng những điều
+            học được trên đường đi.
+        </p>
     </div>
 </div>
+
+<script>
+    (() => {
+        const quantity = document.getElementById('pd-quantity');
+
+        document.getElementById('pd-minus').addEventListener('click', () => {
+            quantity.value = Math.max(1, (parseInt(quantity.value) || 1) - 1);
+        });
+
+        document.getElementById('pd-plus').addEventListener('click', () => {
+            quantity.value = Math.min(99, (parseInt(quantity.value) || 1) + 1);
+        });
+
+        function addToCart() {
+            const qty = Math.max(1, Math.min(99, parseInt(quantity.value) || 1));
+
+            let cart;
+            try {
+                cart = JSON.parse(localStorage.getItem('bookCart') || '[]');
+                if (!Array.isArray(cart)) cart = [];
+            } catch {
+                cart = [];
+            }
+
+            const id = '@id';
+            const existing = cart.find(item => String(item.id) === id);
+
+            if (existing) {
+                existing.quantity = Math.min(999, (Number(existing.quantity) || 0) + qty);
+            } else {
+                cart.push({
+                    id: id,
+                    name: '@name',
+                    price: @price,
+                    image: '@image',
+                    quantity: qty
+                });
+            }
+
+            localStorage.setItem('bookCart', JSON.stringify(cart));
+            alert('Đã thêm sách vào giỏ hàng!');
+        }
+
+        document.getElementById('pd-add').addEventListener('click', addToCart);
+
+        document.getElementById('pd-buy').addEventListener('click', () => {
+            addToCart();
+            window.location.href = '/Cart';
+        });
+    })();
+</script>

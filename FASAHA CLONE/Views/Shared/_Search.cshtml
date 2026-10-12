@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Tìm kiếm sách";
+}
+
+<div class="container my-4">
+    <div class="p-4 rounded" style="background-color: #fff0f5;">
+        <h4 class="mb-3">Tìm kiếm sách</h4>
+
+        <form action="/Product" method="get">
+            <div class="input-group">
+                <input type="text"
+                       name="keyword"
+                       class="form-control"
+                       placeholder="Nhập tên sách bạn muốn tìm..."
+                       aria-label="Tìm kiếm sách" />
+
+                <button type="submit"
+                        class="btn text-white"
+                        style="background-color: #ff6fa4;">
+                    Tìm kiếm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

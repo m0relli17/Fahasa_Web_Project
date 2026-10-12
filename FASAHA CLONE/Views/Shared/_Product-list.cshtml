@@ -2,37 +2,351 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <body>
-        <section class="products-section">
-            <!-- Tab điều hướng (Rất giống Fahasa) -->
-            <div class="product-tabs">
-                <button class="tab-btn active">SÁCH BÁN CHẠY</button>
-                <button class="tab-btn">SÁCH MỚI PHÁT HÀNH</button>
-                <button class="tab-btn">SÁCH SẮP PHÁT HÀNH</button>
+    ViewData["Title"] = "Sách - Fahasa";
+    var books = new[]
+    {
+        new { Id = 1, Name = "Nhà Giả Kim", Author = "Paulo Coelho", Price = 68000, OldPrice = 90000, Category = "Văn học", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=The+Alchemist" },
+        new { Id = 2, Name = "Đắc Nhân Tâm", Author = "Dale Carnegie", Price = 76000, OldPrice = 99000, Category = "Kỹ năng", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=How+to+Win" },
+        new { Id = 3, Name = "Doraemon", Author = "Fujiko F. Fujio", Price = 25000, OldPrice = 30000, Category = "Manga", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=Doraemon" },
+        new { Id = 4, Name = "Tôi Thấy Hoa Vàng", Author = "Nguyễn Nhật Ánh", Price = 95000, OldPrice = 120000, Category = "Văn học", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=Mat+Biec" },
+        new { Id = 5, Name = "One Piece", Author = "Eiichiro Oda", Price = 28000, OldPrice = 35000, Category = "Manga", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=One+Piece" },
+        new { Id = 6, Name = "Tuổi Trẻ Đáng Giá Bao Nhiêu", Author = "Rosie Nguyễn", Price = 72000, OldPrice = 90000, Category = "Kỹ năng", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=Youth" },
+        new { Id = 7, Name = "Harry Potter", Author = "J. K. Rowling", Price = 115000, OldPrice = 145000, Category = "Tiểu thuyết", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=Harry+Potter" },
+        new { Id = 8, Name = "Conan", Author = "Gosho Aoyama", Price = 22000, OldPrice = 28000, Category = "Manga", Image = "https://placehold.co/300x380/fff0f5/ff6fa4?text=Detective+Conan" }
+    };
+}
+
+<style>
+    .pl-page {
+        --pink: #ff6fa4;
+        --pink-light: #fff0f5;
+        --text: #333;
+        color: var(--text);
+        font-family: Arial, sans-serif;
+        padding: 24px 0 50px;
+    }
+
+        .pl-page * {
+            box-sizing: border-box;
+        }
+
+    .pl-breadcrumb {
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 20px;
+    }
+
+        .pl-breadcrumb a {
+            color: #888;
+            text-decoration: none;
+        }
+
+    .pl-title {
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0 0 8px;
+    }
+
+    .pl-subtitle {
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .pl-layout {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+    }
+
+    .pl-sidebar, .pl-toolbar {
+        border: 1px solid #eee;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .pl-sidebar {
+        padding: 20px;
+    }
+
+        .pl-sidebar h3 {
+            font-size: 17px;
+            margin: 0 0 16px;
+        }
+
+    .pl-category {
+        display: block;
+        padding: 11px 12px;
+        margin: 4px 0;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #555;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+        .pl-category:hover, .pl-category.active {
+            background: var(--pink-light);
+            color: #e94f89;
+            font-weight: 700;
+        }
+
+    .pl-toolbar {
+        padding: 14px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+        .pl-toolbar select {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+            outline-color: var(--pink);
+        }
+
+    .pl-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .pl-card {
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        transition: .2s;
+        min-width: 0;
+    }
+
+        .pl-card:hover {
+            transform: translateY(-4px);
+            border-color: #ffc1d7;
+            box-shadow: 0 8px 22px #ff6fa41c;
+        }
+
+    .pl-cover {
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 3.5;
+        object-fit: cover;
+        background: var(--pink-light);
+    }
+
+    .pl-sale {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--pink);
+        color: white;
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .pl-info {
+        padding: 12px;
+    }
+
+    .pl-book-name {
+        color: #333;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.5;
+        height: 42px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+
+    .pl-author {
+        color: #999;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .pl-price {
+        color: #ef4f87;
+        font-size: 16px;
+        font-weight: 800;
+    }
+
+    .pl-old-price {
+        color: #aaa;
+        font-size: 12px;
+        text-decoration: line-through;
+        margin-top: 4px;
+    }
+
+    .pl-detail-link {
+        display: block;
+        margin-top: 12px;
+        background: var(--pink);
+        color: white;
+        text-align: center;
+        padding: 10px 5px;
+        border-radius: 8px;
+        font-size: 13px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .pl-detail-link:hover {
+            background: #f0528c;
+            color: white;
+        }
+
+    .pl-empty {
+        display: none;
+        text-align: center;
+        color: #888;
+        padding: 45px 10px;
+        grid-column: 1 / -1;
+    }
+
+    @@media (max-width: 1000px) {
+        .pl-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    @@media (max-width: 700px) {
+        .pl-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .pl-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .pl-sidebar {
+            padding: 14px;
+        }
+    }
+</style>
+
+<div class="pl-page">
+    <div class="pd-breadcrumb">
+        <a href="/">Miaoo</a> /
+        <a href="/Product">Tất cả sách</a> /
+        Chi tiết sách
+    </div>
+
+    <h1 class="pl-title">Miaoo Bookstore</h1>
+    <p class="pl-subtitle">
+        Một chiếc tiệm sách nhỏ dành cho những tâm hồn mê đọc 💗
+    </p>
+
+    <div class="pl-layout">
+        <aside class="pl-sidebar">
+            <h3>Danh mục sách</h3>
+            <a class="pl-category active" data-category="all">Tất cả sách</a>
+            <a class="pl-category" data-category="Văn học">Văn học</a>
+            <a class="pl-category" data-category="Manga">Manga & Comic</a>
+            <a class="pl-category" data-category="Tiểu thuyết">Tiểu thuyết</a>
+            <a class="pl-category" data-category="Kỹ năng">Sách kỹ năng</a>
+        </aside>
+
+        <section>
+            <div class="pl-toolbar">
+                <span id="pl-count">Có @books.Length sản phẩm</span>
+                <select id="pl-sort" aria-label="Sắp xếp sách">
+                    <option value="default">Sắp xếp: Mặc định</option>
+                    <option value="low">Giá tăng dần</option>
+                    <option value="high">Giá giảm dần</option>
+                    <option value="name">Tên A - Z</option>
+                </select>
             </div>
 
-            <!-- Lưới sản phẩm -->
-            <div class="product-grid">
-                <!-- Lặp lại khối product-card này khoảng 8-12 lần -->
-                <div class="product-card">
-                    <div class="product-badge">-20%</div> <!-- Huy hiệu giảm giá -->
-                    <div class="product-image">
-                        <img src="images/sach-dac-nhan-tam.jpg" alt="Đắc Nhân Tâm">
-                        <button class="btn-quick-view">Xem nhanh</button> <!-- Hiệu ứng hover -->
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Đắc Nhân Tâm</h3>
-                        <p class="product-author">Dale Carnegie</p>
-                        <div class="product-price">
-                            <span class="old-price">108.000đ</span>
-                            <span class="new-price">86.400đ</span>
+            <div class="pl-grid" id="pl-grid">
+                @foreach (var book in books)
+                {
+                    <article class="pl-card"
+                             data-category="@book.Category"
+                             data-price="@book.Price"
+                             data-name="@book.Name">
+                        <span class="pl-sale">-20%</span>
+                        <a href="/Product/Details/@book.Id">
+                            <img class="pl-cover" src="@book.Image"
+                                 alt="@book.Name" loading="lazy" />
+                        </a>
+                        <div class="pl-info">
+                            <div class="pl-book-name">@book.Name</div>
+                            <div class="pl-author">@book.Author</div>
+                            <div class="pl-price">@book.Price.ToString("N0")₫</div>
+                            <div class="pl-old-price">@book.OldPrice.ToString("N0")₫</div>
+                            <a class="pl-detail-link" href="/Product/Details/@book.Id">
+                                Xem chi tiết
+                            </a>
                         </div>
-                        <button class="btn-add-cart">Chọn mua</button>
-                    </div>
+                    </article>
+                }
+                <div class="pl-empty" id="pl-empty">
+                    Không tìm thấy sản phẩm phù hợp.
                 </div>
-
-                <!-- Các product-card khác... -->
             </div>
         </section>
-    </body>
-}
+    </div>
+</div>
+
+<script>
+    (() => {
+        const grid = document.getElementById('pl-grid');
+        if (!grid) return;
+
+        const cards = [...grid.querySelectorAll('.pl-card')];
+        const count = document.getElementById('pl-count');
+        const sort = document.getElementById('pl-sort');
+        const empty = document.getElementById('pl-empty');
+        let category = 'all';
+
+        function render() {
+            const keyword = (document.getElementById('pl-search')?.value || '')
+                .trim().toLocaleLowerCase('vi');
+
+            let visible = cards.filter(card => {
+                const matchesCategory = category === 'all' ||
+                    card.dataset.category === category;
+                const matchesSearch = (card.dataset.name || '')
+                    .toLocaleLowerCase('vi').includes(keyword);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (sort.value === 'low')
+                visible.sort((a, b) => +a.dataset.price - +b.dataset.price);
+            if (sort.value === 'high')
+                visible.sort((a, b) => +b.dataset.price - +a.dataset.price);
+            if (sort.value === 'name')
+                visible.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name, 'vi'));
+
+            cards.forEach(card => card.style.display = 'none');
+            visible.forEach(card => {
+                card.style.display = '';
+                grid.insertBefore(card, empty);
+            });
+
+            count.textContent = `Có ${visible.length} sản phẩm`;
+            empty.style.display = visible.length ? 'none' : 'block';
+        }
+
+        document.querySelectorAll('.pl-category').forEach(link => {
+            link.addEventListener('click', () => {
+                category = link.dataset.category;
+                document.querySelectorAll('.pl-category')
+                    .forEach(item => item.classList.remove('active'));
+                link.classList.add('active');
+                render();
+            });
+        });
+
+        sort.addEventListener('change', render);
+        document.getElementById('pl-search')?.addEventListener('input', render);
+    })();
+</script>

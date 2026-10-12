@@ -2,41 +2,107 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-}
-<!-- MAIN BANNER SECTION -->
-<section class="banner-section">
-    <div class="banner-container">
 
-        <!-- Banner chính (Slide lớn bên trái) -->
-        <div class="main-slider">
-            <a href="#">
-                <img src="https://cdn0.fahasa.com/media/magentotrace/portal/full/2024/10/19/Banner_20_10_840x320.jpg" alt="Chương trình 20/10">
-            </a>
-            <!-- Chấm chuyển slide (Pagination dots) -->
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+}
+<style>
+    .miaoo-banner {
+        background-color: #fff0f5;
+        border-radius: 15px;
+        padding: 45px 35px;
+        margin-top: 25px;
+        margin-bottom: 35px;
+    }
+
+        .miaoo-banner h1 {
+            color: #333;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+            .miaoo-banner h1 span {
+                color: #ff6fa4;
+            }
+
+        .miaoo-banner p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .miaoo-banner .btn-miaoo {
+            background-color: #ff6fa4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .miaoo-banner .btn-miaoo:hover {
+                background-color: #ed528c;
+                color: white;
+            }
+
+    .miaoo-banner-image {
+        background-color: #ffdce9;
+        border-radius: 15px;
+        min-height: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 25px;
+        color: #d94f86;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    @@media (max-width: 767px) {
+        .miaoo-banner {
+            padding: 30px 20px;
+        }
+
+            .miaoo-banner h1 {
+                font-size: 28px;
+            }
+
+        .miaoo-banner-image {
+            min-height: 150px;
+            margin-top: 25px;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="miaoo-banner">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <p class="text-uppercase fw-bold mb-2"
+                   style="color: #ff6fa4;">
+                    Welcome to Miaoo
+                </p>
+
+                <h1>
+                    Khám phá thế giới <span>sách</span>
+                </h1>
+
+                <p>
+                    Từ những bộ manga hấp dẫn đến các cuốn tiểu thuyết
+                    đầy cảm xúc, Miaoo luôn có một câu chuyện dành cho bạn.
+                </p>
+
+                <a href="/Product" class="btn-miaoo">
+                    Khám phá ngay
+                </a>
+            </div>
+
+            <div class="col-md-5">
+                <div class="miaoo-banner-image">
+                    Không gian dành cho những người yêu sách
+                </div>
             </div>
         </div>
-
-        <!-- 4 Banner nhỏ bên dưới/bên cạnh -->
-        <div class="sub-banners">
-            <a href="#" class="sub-banner-item">
-                <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-10-2024/ThapSangTriThuc_310x210.jpg" alt="Thắp sáng tri thức">
-            </a>
-            <a href="#" class="sub-banner-item">
-                <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-10-2024/LeHoiMaQuai_310x210.jpg" alt="Lễ hội ma quái">
-            </a>
-            <a href="#" class="sub-banner-item">
-                <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-10-2024/Deli_310x210.jpg" alt="Hành trang sẵn sàng">
-            </a>
-            <a href="#" class="sub-banner-item">
-                <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-10-2024/HieuMinh_310x210.jpg" alt="Hiểu mình hiểu người">
-            </a>
-        </div>
-
     </div>
-</section>
+</div>

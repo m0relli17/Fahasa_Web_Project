@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model List<string>
+
+@{
+    ViewData["Title"] = "Tìm kiếm sách";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4" style="color: #ff6fa4;">
+        Tìm kiếm sách
+    </h2>
+
+    <form action="/Product/Index" method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text"
+                   name="keyword"
+                   value="@ViewBag.Keyword"
+                   class="form-control"
+                   placeholder="Nhập tên sách cần tìm..." />
+
+            <button type="submit"
+                    class="btn text-white"
+                    style="background-color: #ff6fa4;">
+                Tìm kiếm
+            </button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Keyword as string))
+    {
+        <p>
+            Kết quả tìm kiếm cho:
+            <strong>@ViewBag.Keyword</strong>
+        </p>
+    }
+
+    @if (Model.Count > 0)
+    {
+        <div class="row g-3">
+            @foreach (var book in Model)
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 p-3">
+                        <h5>@book</h5>
+                        <p class="text-muted">Sách tại Miaoo</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Không tìm thấy sách phù hợp.</p>
+    }
+</div>

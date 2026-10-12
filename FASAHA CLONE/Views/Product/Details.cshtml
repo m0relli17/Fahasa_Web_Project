@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+
+    int id = ViewBag.Id ?? 1;
+    string[] names = {
+        "Doraemon",
+        "Conan",
+        "Nhà Giả Kim",
+        "Harry Potter",
+        "Đắc Nhân Tâm",
+        "One Piece"
+    };
+
+    string[] prices = {
+        "25000", "35000", "79000",
+        "120000", "68000", "30000"
+    };
+
+    string name = names[(id - 1) % names.Length];
+    string price = prices[(id - 1) % prices.Length];
+}
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="border rounded p-5 text-center"
+                 style="background-color: #fff0f5; min-height: 300px;">
+                <h4 style="color: #ff6fa4;">Miaoo</h4>
+                <p>Không gian dành cho những người yêu sách</p>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <p class="text-muted">Trang chủ / Sản phẩm / Chi tiết</p>
+            <h2>@name</h2>
+            <h4 class="my-3" style="color: #ff6fa4;">
+                @string.Format("{0:N0}", int.Parse(price))đ
+            </h4>
+
+            <p>
+                Khám phá cuốn sách thú vị dành cho bạn.
+                Sản phẩm thuộc bộ sưu tập sách của Miaoo.
+            </p>
+
+            <div class="d-flex gap-2 my-4">
+                <input type="number" id="quantity"
+                       class="form-control" value="1" min="1"
+                       style="max-width: 90px;" />
+
+                <button class="btn text-white"
+                        style="background-color: #ff6fa4;"
+                        onclick="addToCart()">
+                    Thêm vào giỏ hàng
+                </button>
+            </div>
+
+            <a href="/Cart" style="color: #ff6fa4;">
+                Xem giỏ hàng
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function addToCart() {
+        var id = @id;
+        var name = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(name));
+        var price = Number(@price);
+        var quantity = parseInt(document.getElementById("quantity").value);
+
+        if (quantity < 1 || isNaN(quantity)) {
+            alert("Vui lòng chọn số lượng hợp lệ.");
+            return;
+        }
+
+        var cart = JSON.parse(localStorage.getItem("miaooCart") || "[]");
+        var item = cart.find(function (x) { return x.id === id; });
+
+        if (item) {
+            item.quantity += quantity;
+        } else {
+            cart.push({
+                id: id,
+                name: name,
+                price: price,
+                quantity: quantity
+            });
+        }
+
+        localStorage.setItem("miaooCart", JSON.stringify(cart));
+        alert("Đã thêm sách vào giỏ hàng!");
+    }
+</script>

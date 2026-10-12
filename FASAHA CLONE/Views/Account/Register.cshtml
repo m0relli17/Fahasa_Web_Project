@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<div class="container my-5" style="max-width: 500px;">
+    <div class="card p-4 shadow-sm">
+        <h3 class="text-center mb-4" style="color: #ff6fa4;">
+            Tạo tài khoản Miaoo
+        </h3>
+
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Họ và tên</label>
+                <input type="text" class="form-control"
+                       placeholder="Nhập họ và tên" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control"
+                       placeholder="Nhập email" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control"
+                       placeholder="Tạo mật khẩu" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Xác nhận mật khẩu</label>
+                <input type="password" class="form-control"
+                       placeholder="Nhập lại mật khẩu" required />
+            </div>
+
+            <button type="submit" class="btn text-white w-100"
+                    style="background-color: #ff6fa4;">
+                Đăng ký
+            </button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            Đã có tài khoản?
+            <a href="/Account/Login" style="color: #ff6fa4;">
+                Đăng nhập
+            </a>
+        </p>
+    </div>
+</div>
+

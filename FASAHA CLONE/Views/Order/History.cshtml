@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    
+    ViewData["Title"] = "Lịch sử mua hàng";
+
+<div class="container my-5">
+    <h2 class="mb-4">Lịch sử mua hàng</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead style="background-color: #fff0f5;">
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody id="historyItems"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    var history = JSON.parse(
+        localStorage.getItem("miaooHistory") || "[]"
+    );
+    var tbody = document.getElementById("historyItems");
+
+    if (history.length === 0) {
+        tbody.innerHTML =
+            '<tr><td colspan="4" class="text-center">' +
+            'Bạn chưa có đơn hàng nào.</td></tr>';
+    } else {
+        history.forEach(function (order) {
+            tbody.innerHTML +=
+                '<tr><td>' + order.orderId + '</td>' +
+                '<td>' + order.date + '</td>' +
+                '<td>' + order.total.toLocaleString("vi-VN") + 'đ</td>' +
+                '<td>' + order.status + '</td></tr>';
+        });
+    }
+</script>
+
+}

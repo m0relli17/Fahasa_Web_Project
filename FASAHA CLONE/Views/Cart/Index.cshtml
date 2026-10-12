@@ -1,0 +1,137 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    
+    ViewData["Title"] = "Giỏ hàng";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">Giỏ hàng của bạn</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead style="background-color: #fff0f5;">
+                <tr>
+                    <th>Tên sách</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="cartItems"></tbody>
+        </table>
+    </div>
+
+    <div class="text-end">
+        <h4 id="totalPrice">Tổng tiền: 0đ</h4>
+        <button class="btn text-white"
+                style="background-color: #ff6fa4;"
+                onclick="checkout()">
+            Đặt hàng
+        </button>
+    </div>
+</div>
+
+<script>
+    function getCart() {
+        return JSON.parse(localStorage.getItem("miaooCart") || "[]");
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem("miaooCart", JSON.stringify(cart));
+    }
+
+    function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + "đ";
+    }
+
+    function renderCart() {
+        var cart = getCart();
+        var tbody = document.getElementById("cartItems");
+        var total = 0;
+
+        tbody.innerHTML = "";
+
+        if (cart.length === 0) {
+            tbody.innerHTML =
+                '<tr><td colspan="5" class="text-center py-4">' +
+                'Giỏ hàng của bạn đang trống.</td></tr>';
+        }
+
+        cart.forEach(function (item, index) {
+            var subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            tbody.innerHTML +=
+                '<tr>' +
+                '<td>' + item.name + '</td>' +
+                '<td>' + formatPrice(item.price) + '</td>' +
+                '<td>' +
+                '<button class="btn btn-sm btn-outline-secondary" ' +
+                'onclick="changeQuantity(' + index + ',-1)">-</button> ' +
+                item.quantity + ' ' +
+                '<button class="btn btn-sm btn-outline-secondary" ' +
+                'onclick="changeQuantity(' + index + ',1)">+</button>' +
+                '</td>' +
+                '<td>' + formatPrice(subtotal) + '</td>' +
+                '<td><button class="btn btn-sm btn-danger" ' +
+                'onclick="removeItem(' + index + ')">Xóa</button></td>' +
+                '</tr>';
+        });
+
+        document.getElementById("totalPrice").textContent =
+            "Tổng tiền: " + formatPrice(total);
+    }
+
+    function changeQuantity(index, amount) {
+        var cart = getCart();
+        cart[index].quantity += amount;
+
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+
+        saveCart(cart);
+        renderCart();
+    }
+
+    function removeItem(index) {
+        var cart = getCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+    }
+
+    function checkout() {
+        var cart = getCart();
+
+        if (cart.length === 0) {
+            alert("Giỏ hàng đang trống!");
+            return;
+        }
+
+        var history = JSON.parse(
+            localStorage.getItem("miaooHistory") || "[]"
+        );
+
+        history.push({
+            orderId: "MIAOO" + Date.now(),
+            date: new Date().toLocaleDateString("vi-VN"),
+            total: cart.reduce(function (sum, item) {
+                return sum + item.price * item.quantity;
+            }, 0),
+            status: "Đã đặt hàng"
+        });
+
+        localStorage.setItem("miaooHistory", JSON.stringify(history));
+        localStorage.removeItem("miaooCart");
+
+        alert("Đặt hàng thành công!");
+        window.location.href = "/Order/History";
+    }
+
+    renderCart();
+</script>
+

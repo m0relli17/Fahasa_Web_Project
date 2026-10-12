@@ -3,57 +3,135 @@
 *@
 @{
 }
-<!-- Phần Danh mục nổi bật -->
-<div class="featured-categories">
-    <h2 class="section-title">DANH MỤC NỔI BẬT</h2>
+<style>
+    .miaoo-feature {
+        margin-top: 35px;
+        margin-bottom: 40px;
+    }
 
-    <div class="category-grid">
-        <!-- Item 1 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Van+Hoc" alt="Sách Văn Học">
-            </div>
-            <span class="category-name">Sách Văn Học</span>
-        </a>
+    .miaoo-feature-title {
+        color: #333;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
 
-        <!-- Item 2 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Kinh+Te" alt="Kinh Tế">
-            </div>
-            <span class="category-name">Kinh Tế</span>
-        </a>
+    .miaoo-feature-subtitle {
+        color: #888;
+        margin-bottom: 25px;
+    }
 
-        <!-- Item 3 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Thieu+Nhi" alt="Thiếu Nhi">
-            </div>
-            <span class="category-name">Thiếu Nhi</span>
-        </a>
+    .miaoo-feature-card {
+        display: block;
+        height: 100%;
+        padding: 25px 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: 0.2s;
+        border: 1px solid #f5dce5;
+    }
 
-        <!-- Item 4 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Ky+Nang" alt="Kỹ Năng Sống">
-            </div>
-            <span class="category-name">Kỹ Năng Sống</span>
-        </a>
+        .miaoo-feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(255, 111, 164, 0.15);
+        }
 
-        <!-- Item 5 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Ngoai+Ngu" alt="Ngoại Ngữ">
-            </div>
-            <span class="category-name">Ngoại Ngữ</span>
-        </a>
+        .miaoo-feature-card h5 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-        <!-- Item 6 -->
-        <a href="#" class="category-item">
-            <div class="category-img-box">
-                <img src="https://via.placeholder.com/100x100?text=Manga" alt="Manga - Comic">
+        .miaoo-feature-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        .miaoo-feature-card a,
+        .miaoo-feature-card:hover h5 {
+            color: #e94f89;
+        }
+
+        .miaoo-feature-card .feature-number {
+            color: #ff6fa4;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+    .feature-bg-pink {
+        background-color: #fff0f5;
+    }
+
+    .feature-bg-purple {
+        background-color: #f4f0ff;
+    }
+
+    .feature-bg-yellow {
+        background-color: #fff7e6;
+    }
+
+    .feature-bg-green {
+        background-color: #eef8f0;
+    }
+</style>
+
+<div class="container">
+    <section class="miaoo-feature">
+        <h2 class="miaoo-feature-title">
+            Danh mục nổi bật
+        </h2>
+
+        <p class="miaoo-feature-subtitle">
+            Khám phá những thể loại sách được yêu thích tại Miaoo.
+        </p>
+
+        <div class="row g-3">
+            <div class="col-6 col-lg-3">
+                <a href="/Product?category=Manga"
+                   class="miaoo-feature-card feature-bg-pink">
+                    <div class="feature-number">01 / CATEGORY</div>
+                    <h5>Manga & Comic</h5>
+                    <p>
+                        Những bộ truyện tranh hấp dẫn và đầy màu sắc.
+                    </p>
+                </a>
             </div>
-            <span class="category-name">Manga - Comic</span>
-        </a>
-    </div>
+
+            <div class="col-6 col-lg-3">
+                <a href="/Product?category=VanHoc"
+                   class="miaoo-feature-card feature-bg-purple">
+                    <div class="feature-number">02 / CATEGORY</div>
+                    <h5>Văn học</h5>
+                    <p>
+                        Những tác phẩm mang đến nhiều cảm xúc.
+                    </p>
+                </a>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <a href="/Product?category=TieuThuyet"
+                   class="miaoo-feature-card feature-bg-yellow">
+                    <div class="feature-number">03 / CATEGORY</div>
+                    <h5>Tiểu thuyết</h5>
+                    <p>
+                        Khám phá những câu chuyện và thế giới mới.
+                    </p>
+                </a>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <a href="/Product?category=KyNang"
+                   class="miaoo-feature-card feature-bg-green">
+                    <div class="feature-number">04 / CATEGORY</div>
+                    <h5>Sách kỹ năng</h5>
+                    <p>
+                        Học hỏi kiến thức và phát triển bản thân.
+                    </p>
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
