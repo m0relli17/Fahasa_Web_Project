@@ -24,7 +24,7 @@
     <div class="header-search-bar" style="flex: 1; max-width: 650px;">
         <form id="search_mini_form" action="/Product" method="get">
             <div class="input-box" style="display: flex; background: #fff; border-radius: 8px; padding: 2px 8px;">
-                <input id="search" type="text" name="keyword" value="" class="input-text" placeholder="Thử tìm kiếm..." style="width: 100%; border: none; outline: none; padding: 8px;" />
+                <input id="search" type="text" name="keyword" value="@Context.Request.Query["keyword"]" class="input-text" placeholder="Thử tìm kiếm..." style="width: 100%; border: none; outline: none; padding: 8px;" />
                 <button type="submit" title="Tìm kiếm" class="button-search" style="background: transparent; border: none; cursor: pointer; padding: 8px;">
                     <i class="bi bi-search-heart-fill" style="font-size: 18px; color: #ff6fa4;"></i>
                 </button>
